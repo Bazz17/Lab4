@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
 <h1>User Badges</h1>
+<a href="{% url 'user_badge-create' %}">Create New Badge</a>
 <form method="get">
     <input type="text" name="q" placeholder="Search user badges..." value="{{ request.GET.q }}">
     <button type="submit">Search</button>

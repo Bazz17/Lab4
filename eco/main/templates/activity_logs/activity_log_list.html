@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
 <h1>Activity Logs</h1>
+<a href="{% url 'activity_log-create' %}">Create New Activity Log</a>
 <form method="get">
     <input type="text" name="q" placeholder="Search activity logs..." value="{{ request.GET.q }}">
     <button type="submit">Search</button>

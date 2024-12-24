@@ -5,5 +5,7 @@
 <p>Habit: {{ activity_log.user_habit.habit.name }}</p>
 <p>Date: {{ activity_log.date }}</p>
 <p>Status: {{ activity_log.completed|yesno:"Completed,Missed" }}</p>
+<a href="{% url 'activity_log-update' activity_log.id %}">Edit</a>
+<a href="{% url 'activity_log-delete' activity_log.id %}">Delete</a>
 <a href="{% url 'activitylog-list' %}">Back to Activity Logs</a>
 {% endblock %}

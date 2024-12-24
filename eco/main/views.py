@@ -1,10 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.contrib.auth import authenticate, login
-from django.views.generic import ListView, DetailView
 from django.db.models import Q
 from .models import *
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import *
+
 
 def register(request):
     if request.method == 'POST':
@@ -139,3 +143,158 @@ class TipDetailView(DetailView):
     model = Tip
     template_name = 'tips/tip_detail.html'
     context_object_name = 'tip'
+
+##############################################################################
+# Habit CRUD
+class HabitCreateView(LoginRequiredMixin, CreateView):
+    model = Habit
+    template_name = 'habits/habit_form.html'
+    fields = ['name', 'description', 'points']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class HabitUpdateView(LoginRequiredMixin, UpdateView):
+    model = Habit
+    template_name = 'habits/habit_form.html'
+    fields = ['name', 'description', 'points']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class HabitDeleteView(LoginRequiredMixin, DeleteView):
+    model = Habit
+    template_name = 'habits/habit_confirm_delete.html'
+    success_url = reverse_lazy('habit-list')
+
+# UserHabit CRUD
+class UserHabitCreateView(LoginRequiredMixin, CreateView):
+    model = UserHabit
+    template_name = 'user_habits/user_habit_form.html'
+    fields = ['user', 'habit', 'frequency', 'start_date', 'end_date']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class UserHabitUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserHabit
+    template_name = 'user_habits/user_habit_form.html'
+    fields = ['user', 'habit', 'frequency', 'start_date', 'end_date']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class UserHabitDeleteView(LoginRequiredMixin, DeleteView):
+    model = UserHabit
+    template_name = 'user_habits/user_habit_confirm_delete.html'
+    success_url = reverse_lazy('user_habit-list')
+
+# ActivityLog CRUD
+class ActivityLogCreateView(LoginRequiredMixin, CreateView):
+    model = ActivityLog
+    template_name = 'activity_logs/activity_log_form.html'
+    fields = ['user_habit', 'date', 'completed']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class ActivityLogUpdateView(LoginRequiredMixin, UpdateView):
+    model = ActivityLog
+    template_name = 'activity_logs/activity_log_form.html'
+    fields = ['user_habit', 'date', 'completed']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class ActivityLogDeleteView(LoginRequiredMixin, DeleteView):
+    model = ActivityLog
+    template_name = 'activity_logs/activity_log_confirm_delete.html'
+    success_url = reverse_lazy('activity_log-list')
+
+# Goal CRUD
+class GoalCreateView(LoginRequiredMixin, CreateView):
+    model = Goal
+    template_name = 'goals/goal_form.html'
+    fields = ['user', 'description', 'target_date', 'achieved']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class GoalUpdateView(LoginRequiredMixin, UpdateView):
+    model = Goal
+    template_name = 'goals/goal_form.html'
+    fields = ['user', 'description', 'target_date', 'achieved']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class GoalDeleteView(LoginRequiredMixin, DeleteView):
+    model = Goal
+    template_name = 'goals/goal_confirm_delete.html'
+    success_url = reverse_lazy('goal-list')
+
+# Badge CRUD
+class BadgeCreateView(LoginRequiredMixin, CreateView):
+    model = Badge
+    template_name = 'badges/badge_form.html'
+    fields = ['name', 'description', 'icon', 'criteria']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class BadgeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Badge
+    template_name = 'badges/badge_form.html'
+    fields = ['name', 'description', 'icon', 'criteria']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class BadgeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Badge
+    template_name = 'badges/badge_confirm_delete.html'
+    success_url = reverse_lazy('badge-list')
+
+# UserBadge CRUD
+class UserBadgeCreateView(LoginRequiredMixin, CreateView):
+    model = UserBadge
+    template_name = 'user_badges/user_badge_form.html'
+    fields = ['user', 'badge', 'awarded_date']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class UserBadgeUpdateView(LoginRequiredMixin, UpdateView):
+    model = UserBadge
+    template_name = 'user_badges/user_badge_form.html'
+    fields = ['user', 'badge', 'awarded_date']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class UserBadgeDeleteView(LoginRequiredMixin, DeleteView):
+    model = UserBadge
+    template_name = 'user_badges/user_badge_confirm_delete.html'
+    success_url = reverse_lazy('user_badge-list')
+
+# Tip CRUD
+class TipCreateView(LoginRequiredMixin, CreateView):
+    model = Tip
+    template_name = 'tips/tip_form.html'
+    fields = ['title', 'content', 'published_date']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class TipUpdateView(LoginRequiredMixin, UpdateView):
+    model = Tip
+    template_name = 'tips/tip_form.html'
+    fields = ['title', 'content', 'published_date']
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+class TipDeleteView(LoginRequiredMixin, DeleteView):
+    model = Tip
+    template_name = 'tips/tip_confirm_delete.html'
+    success_url = reverse_lazy('tip-list')
