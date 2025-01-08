@@ -5,6 +5,7 @@ Generički pogledi:
 - Implementiranje ListView i DetailView za prikaz svih modela i njihovih detalja uz filtriranje rezultata te prikaz relacija ukoliko postoje
 - Kreirani testni podaci uz funkcionalnost pretraživanja objekata unutar ListView prikaza
 
+CRUD funkcionalnosti:
 - Create (Dodavanje):
 Omogućite dodavanje novih objekata putem web forme s validacijom.
 Nakon uspješnog unosa, preusmjeravanje korisnika na ListView ili DetailView novog objekta.
