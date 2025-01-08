@@ -1,4 +1,4 @@
-# Projektni zadatak 2 i 3
+# Projektni zadatak 2 i 3 (sada spojeno sve skupa)
 # Ivan Bazina 
 
 Generički pogledi: 
