@@ -1,5 +1,6 @@
 # Projektni zadatak 2 i 3
-Ivan Bazina 
+# Ivan Bazina 
+
 Generički pogledi: 
 - Implementiranje ListView i DetailView za prikaz svih modela i njihovih detalja uz filtriranje rezultata te prikaz relacija ukoliko postoje
 - Kreirani testni podaci uz funkcionalnost pretraživanja objekata unutar ListView prikaza
