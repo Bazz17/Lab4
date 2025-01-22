@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'rest_framework',
 ]
 
 # Uključivanje autentifikacije putem emaila
@@ -53,6 +54,16 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 LOGIN_URL = '/login/'  # URL za login stranicu
 LOGIN_REDIRECT_URL = '/home/'  # URL na koji se preusmjerava nakon prijave
 LOGOUT_REDIRECT_URL = '/logged-out/'  # URL na koji se preusmjerava nakon odjave
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',  # Koristi Django sesije za autentifikaciju
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 
 MIDDLEWARE = [

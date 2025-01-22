@@ -1,23 +1,12 @@
-# Projektni zadatak 2 i 3 (sada spojeno sve skupa)
+# Projektni zadatak 4
 # Ivan Bazina 
 
-Generički pogledi: 
-- Implementiranje ListView i DetailView za prikaz svih modela i njihovih detalja uz filtriranje rezultata te prikaz relacija ukoliko postoje
-- Kreirani testni podaci uz funkcionalnost pretraživanja objekata unutar ListView prikaza
+- Kreirani API endpointi za sve modele
+- Funkcije endpoint - a :
+    - Dohvat svih instanci modela (GET)
+    - Kreiranje nove instance (POST)
+    - Dohvat pojedinačne instance po ID-u (GET)
 
-CRUD funkcionalnosti:
-- Create (Dodavanje):
-Omogućite dodavanje novih objekata putem web forme s validacijom.
-Nakon uspješnog unosa, preusmjeravanje korisnika na ListView ili DetailView novog objekta.
-
-- Read (Čitanje):
-Implementiranje ListView za prikaz svih objekata uz filtriranje i pretraživanje po ključnim atributima.
-Korištenje DetailView za prikaz detalja pojedinog objekta.
-
-- Update (Ažuriranje):
-Omogućeno ažuriranje postojećih objekata kroz web formu s validacijom.
-Nakon izmjene, preusmjeravanje korisnika na DetailView ažuriranog objekta.
-
-- Delete (Brisanje):
-Implementiranje funkcionalnosti za brisanje objekata uz potvrdu korisnika.
-Nakon brisanja, preusmjeravanje korisnika na ListView.
+- Osigurane osnovne provjere valjanosti podataka prilikom unosa 
+- Jednostavna dostupnost pomoću URL - ova (npr. /api/badges/ za dohvat svih znački i prikaz njenih atributa)
+>Pristup API - u mogu samo prijavljeni/registrirani korisnici

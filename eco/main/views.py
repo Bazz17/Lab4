@@ -8,7 +8,9 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import *
-
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from .serializers import *
 
 def register(request):
     if request.method == 'POST':
@@ -72,6 +74,14 @@ class HabitDetailView(DetailView):
     template_name = 'habits/habit_detail.html'
     context_object_name = 'habit'
 
+class HabitViewSet(viewsets.ModelViewSet):   # ViewSet - klasa iz Django Rest Frameworka za automatsko rukovanje CRUD operacijama
+    """
+    API endpoint za upravljanje Habit modelom.
+    """
+    queryset = Habit.objects.all()
+    serializer_class = HabitSerializer
+    permission_classes = [IsAuthenticated]  # Ograničavanje pristupa samo za prijavljene korisnike, u nastavku za svaki model
+
 # UserHabit
 class UserHabitListView(BaseSearchListView):
     model = UserHabit
@@ -83,6 +93,14 @@ class UserHabitDetailView(DetailView):
     model = UserHabit
     template_name = 'user_habits/user_habit_detail.html'
     context_object_name = 'user_habit'
+
+class UserHabitViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint za upravljanje UserHabit modelom.
+    """
+    queryset = UserHabit.objects.all()
+    serializer_class = UserHabitSerializer
+    permission_classes = [IsAuthenticated] 
 
 # ActivityLog
 class ActivityLogListView(BaseSearchListView):
@@ -96,6 +114,14 @@ class ActivityLogDetailView(DetailView):
     template_name = 'activity_logs/activity_log_detail.html'
     context_object_name = 'activity_log'
 
+class ActivityLogViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint za upravljanje ActivityLog modelom.
+    """
+    queryset = ActivityLog.objects.all()
+    serializer_class = ActivityLogSerializer
+    permission_classes = [IsAuthenticated] 
+
 # Goal
 class GoalListView(BaseSearchListView):
     model = Goal
@@ -107,6 +133,14 @@ class GoalDetailView(DetailView):
     model = Goal
     template_name = 'goals/goal_detail.html'
     context_object_name = 'goal'
+
+class GoalViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint za upravljanje Goal modelom.
+    """
+    queryset = Goal.objects.all()
+    serializer_class = GoalSerializer
+    permission_classes = [IsAuthenticated] 
 
 # Badge
 class BadgeListView(BaseSearchListView):
@@ -120,6 +154,14 @@ class BadgeDetailView(DetailView):
     template_name = 'badges/badge_detail.html'
     context_object_name = 'badge'
 
+class BadgeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint za upravljanje Badge modelom.
+    """
+    queryset = Badge.objects.all()
+    serializer_class = BadgeSerializer
+    permission_classes = [IsAuthenticated] 
+
 # UserBadge
 class UserBadgeListView(BaseSearchListView):
     model = UserBadge
@@ -132,6 +174,14 @@ class UserBadgeDetailView(DetailView):
     template_name = 'user_badges/user_badge_detail.html'
     context_object_name = 'user_badge'
 
+class UserBadgeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint za upravljanje UserBadge modelom.
+    """
+    queryset = UserBadge.objects.all()
+    serializer_class = UserBadgeSerializer
+    permission_classes = [IsAuthenticated] 
+
 # Tip
 class TipListView(BaseSearchListView):
     model = Tip
@@ -143,6 +193,14 @@ class TipDetailView(DetailView):
     model = Tip
     template_name = 'tips/tip_detail.html'
     context_object_name = 'tip'
+
+class TipViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint za upravljanje Tip modelom.
+    """
+    queryset = Tip.objects.all()
+    serializer_class = TipSerializer
+    permission_classes = [IsAuthenticated] 
 
 ##############################################################################
 # Habit CRUD

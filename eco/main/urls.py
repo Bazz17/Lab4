@@ -1,6 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView, LoginView, TemplateView
-from django.urls import path
+from django.urls import path, include
 from . import views
 #from .views import *
 from .views import (
@@ -12,6 +12,20 @@ from .views import (
     UserBadgeListView, UserBadgeDetailView, UserBadgeCreateView, UserBadgeUpdateView, UserBadgeDeleteView,
     TipListView, TipDetailView, TipCreateView, TipUpdateView, TipDeleteView
 )
+from rest_framework.routers import DefaultRouter
+from .views import HabitViewSet, UserHabitViewSet, ActivityLogViewSet, GoalViewSet, BadgeViewSet, UserBadgeViewSet, TipViewSet 
+# da ne smaram i ubacujem u gornji dio, ljepse ovako
+
+router = DefaultRouter()  # kreiranje jednog routera za sve modele
+
+# registriranje svih modela za ruter
+router.register(r'habits', HabitViewSet, basename='habit')  # /api/habits/
+router.register(r'user-habits', UserHabitViewSet, basename='userhabit')  # /api/user-habits/
+router.register(r'activity-logs', ActivityLogViewSet, basename='activitylog')  # /api/activity-logs/
+router.register(r'goals', GoalViewSet, basename='goal')     # /api/goals/
+router.register(r'badges', BadgeViewSet, basename='badge')  # /api/badges/
+router.register(r'user-badges', UserBadgeViewSet, basename='userbadge')  # /api/user-badges/
+router.register(r'tips', TipViewSet, basename='tip')   # /api/tips/
 
 
 urlpatterns = [
@@ -21,6 +35,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),  # Za registraciju
     path('', views.home_view, name='home'),  # Početna stranica
     path('home/', views.home_view, name='home'),  # Još jedna ruta za home
+
+    path('api/', include(router.urls)),  # Dodavanje API ruta za prethodno registrirane modele iznad
 
 
     # Habit
